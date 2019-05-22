@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Proyecto_Integrador.Models.Usuarios>
+
+@{
+    ViewBag.Title = "Inicio";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+</head>
+
+<h2>Inicio</h2>
+
+    <a class="btn btn-default" href="@Url.Action("Create","Usuarios")">
+        <i class="fas fa-plus-square"></i>
+        Crear
+    </a>
+
+<table class="table table-striped">
+    <tr style="background-color:  #262626; color:grey">
+        <th>
+            @Html.DisplayNameFor(model => model.Documento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Apellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Correo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th>
+             Opciones
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Documento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Correo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                <a class="btn btn-default" href="@Url.Action("Edit","Usuarios",new { id = item.Documento })">
+                    <i class="fas fa-pencil-alt"></i>
+                    Editar
+                </a>
+                <a class="btn btn-default" href="@Url.Action("Details","Usuarios",new { id = item.Documento })">
+                    <i class="fas fa-info"></i>
+                    Detalles
+                </a>
+                <a class="btn btn-default"  href="@Url.Action("Delete","Usuarios",new { id = item.Documento })">
+                    <i class="fas fa-trash-alt"></i>
+                    Eliminar
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,126 @@
+﻿@model IEnumerable<Proyecto_Integrador.Models.Entidades.Pedidos>
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "listaPedidos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+</head>
+
+<h2>Lista de Pedidos</h2>
+
+
+<table class="table table-striped">
+    <tr style="background-color:  #262626; color:grey">
+        <th>
+            @Html.DisplayName("Detalle")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DireccionEntrega)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaSolicitud)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrecioTotal)
+        </th>
+        <th>
+            Opciones
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href="@Url.Action("DetallePedido","Pedidos",new {pedidoId= item.Id})"data-form-method="post">@Html.DisplayFor(modelItem => item.Id)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DireccionEntrega)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaSolicitud)
+            </td>
+            <td id="@item.Id">
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrecioTotal)
+            </td>
+            <td>
+                @{
+                    var rol = User.Identity.GetUserName().Split('-');
+                    if (rol[1].Equals("Administrador"))
+                    {
+                            <a class="btn btn-primary" onclick="ModalOpciones(@item.Id)">
+                                <i class="fa fa-cog"></i>
+                                Opciones
+                            </a>
+                    }
+                    else {
+                        <a class="btn btn-primary" onclick="ModalCancelacion(@item.Id)">
+                            <i class="far fa-times-circle"></i>
+                            Cancelar
+                        </a>
+                    }
+
+                }
+                
+                
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="CancelarPedido">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Confirmar</h4>
+            </div>
+            <div class="modal-body center-block">
+                <div class="col-12">
+                    <p> ¿Desea cancelar este pedido?</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" onclick="Confirmar('Cancelado')">Si</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="OpcionesPedido">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Confirmar</h4>
+            </div>
+            <div class="modal-body center-block">
+                <div class="col-12">
+                    <p> ¿Que desea hacer sobre el pedido?</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="Confirmar('Cancelado')">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="Confirmar('Recibido')">Recibir</button>
+                <button type="button" class="btn btn-success" onclick="Confirmar('Confirmado')">Confirmar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/JS/ListaPedidosCliente.js"></script>
+
+}

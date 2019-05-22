@@ -1,0 +1,111 @@
+﻿@model  List<Proyecto_Integrador.Models.Productos>
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "IndexUsuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/popper.min.js"></script>
+@if (Request.IsAuthenticated)
+{
+    var rol = User.Identity.GetUserName().Split('-');
+    if (!rol[1].Equals("Administrador"))
+    {
+        <br />
+        <button class="btn btn-success" onclick="Finalizar()">Finalizar Compra</button>
+        <br />
+    }
+
+}
+
+<div style="overflow-x:auto;margin-top:50px">
+    <div style="overflow-x:auto;">
+        <table class="table table-condensed" style="border-spacing: 5px;">
+            @{ var itemCount = 0;}
+            @foreach (var item in Model)
+            {
+
+                <td style="width:20%">
+                    <center>
+                        <div style="border-style:ridge;border-width:1px;">
+
+                            <img src="@Url.Content("../Images/" + item.Figura)" alt="Image" style="height:200px; padding:8px" data-toggle="tooltip" data-placement="bottom" data-html="true" title="<p>@item.Descripcion</p>" class="material-tooltip-main" />
+
+                            <br />
+                            <div>
+                                <h4>@Html.DisplayFor(modelItem => item.Nombre)</h4>
+                                <span style="font-size:11px; color:#AAA">Desde:</span>
+                                <br />
+                                <span style="color:#f8971d; font-size:17px"><strong>@Html.DisplayFor(modelItem => item.Precio)</strong></span>
+                            </div>
+                            <div @*style="background-color:#7271dc"*@>
+                                @if (Request.IsAuthenticated)
+                                {
+                                    <button class="btn btn-primary btn-block" onclick="prueba(@item.Id) ">
+                                        <span style="color:#ffffff"><strong>Compra rápida</strong></span>
+                                    </button>
+                                }
+
+                            </div>
+                            <br />
+                        </div>
+                    </center>
+                </td>
+
+                itemCount++;
+                if (itemCount == 3)
+                {
+                    <tr></tr>
+                    itemCount = 0;
+                }
+
+            }
+
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Confirmar</h4>
+            </div>
+            <div class="modal-body center-block">
+                <div class="col-12">
+                    <input class="form-control" type="number" id="Cantidad" placeholder="Ingrese Cantidad">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" onclick="Si()">Si</button>
+                <button type="button" class="btn btn-primary" onclick="No()">No</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="Finalizar">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Confirmar</h4>
+            </div>
+            <div class="modal-body center-block">
+                <div class="col-12">
+                    <input class="form-control" type="text" id="direccion" placeholder="Ingrese direccion entrega">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" onclick="guardarPedido()">Si</button>
+                <button type="button" class="btn btn-primary" onclick="Cancelar()">Cencelar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/JS/IndexProducto.js"></script>
+<script src="~/Scripts/toastr.min.js"></script>
+<link href="~/Content/toastr.min.css" rel="stylesheet" />

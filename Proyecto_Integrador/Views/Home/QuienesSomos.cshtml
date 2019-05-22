@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "QuienesSomos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Quines Somos</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+
+    .row.content {height: 450px}
+
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+
+
+    #caja{
+    width: 100%;
+    height: 95%;
+    }
+    #caja img {width: 100%;
+    height: 100%;
+    }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-inverse"style="background-color:#555!important">
+        <div class="container-fluid">
+        </div>
+    </nav>
+    <div class="container-fluid text-center">
+        <div class="row content">
+            <div class="col-sm-2 sidenav">
+                <img src="~/Images/liston.png" />
+            </div>
+            <div class="col-sm-8 text-left">
+                <h1>Quienes Somos</h1>
+                <p>
+                    Somos una compañia que brinda a las empresas la posibilidad de ampliar sus canales debug de atencióna
+                    y llegar a un mercado mas grande por medio de nuestro canal de atencion, venta, difusión de los productos y
+                    comuncación con los clientes a travéz del chat de servicio. Además de obtener reportes detallados como los
+                    productos mas vendidos, entre otros y tomar decisiones estratégicas frente a ello.
+                </p>
+                <p>Trabajamos día a día para proporcionar el mejor acompañamiento a las empresas buscando siempre la manera de generar estrechos vínculos con sus clientes, desde sus intereses, gustos, atractivos, buscando brindar una experiencia diferente a través de su canal de ventas online.</p>
+            </div>
+            <div class="col-sm-2 sidenav">
+                <div id="caja">
+                    <IMG SRC="~/Images/valores.jpg" style="width:100% !important;height:80% !important">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

@@ -1,0 +1,80 @@
+﻿@model Proyecto_Integrador.Models.Entidades.Pedidos
+@{
+    ViewBag.Title = "PDF";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{ Proyecto_Integrador.Models.Usuarios usuario = ViewData["usuario"] as Proyecto_Integrador.Models.Usuarios;}
+<br />
+<fieldset>
+    <legend>
+        Datos personales
+    </legend>
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+            <label class="form-control"><b>Nombre: </b>@usuario.Nombre</label>
+        </div>
+        <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+            <label class="form-control"><b>Apellido: </b>@usuario.Apellido</label>
+        </div>
+        <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+            <label class="form-control"><b>Correo: </b>@usuario.Correo</label>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+            <label class="form-control"><b>Direccion: </b>@Model.DireccionEntrega</label>
+        </div>
+        <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+            <label class="form-control"><b>Fecha Solicitud: </b>@Model.FechaSolicitud</label>
+        </div>
+        <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+            <label class="form-control"><b>Estado: </b>@Model.Estado</label>
+        </div>
+
+    </div>
+</fieldset>
+<br />
+<br />
+<fieldset>
+    <legend>
+        Productos
+    </legend>
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
+            <table class="table">
+                <thead style="background-color:#ABA9A8">
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Valor</th>
+
+                    </tr>
+                </thead>
+                <tbody style="background-color:#E6E3E1">
+                    @{var i = 0; var total = 0;}
+                    @foreach (var item in Model.Productos)
+                    {
+                        i++;
+                        <tr>
+                            <th scope="row">@i</th>
+                            <td>@item.Nombre</td>
+                            <td>@item.Precio</td>
+
+                        </tr>
+                        total += item.Precio;
+                    }
+
+                    <tr>
+                        <th scope="row">Total</th>
+                        <td></td>
+                        <td>@total</td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</fieldset>

@@ -1,0 +1,92 @@
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Proyecto_Integrador</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/DevExtremeBundle")
+    @Styles.Render("~/Content/toastr")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/DevExtremeBundle")
+    @Scripts.Render("~/bundles/toastr")
+    <style>
+        a:hover {
+            color: black !important;
+        }
+    </style>
+</head>
+
+    <body>
+        <div class="navbar  navbar-fixed-top bg-primary">
+            <div class="container">
+                <div class="navbar-header" style="color:white">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Proyecto Integrador", "IndexUsuario", "Productos", new { area = "" }, new { @class = "navbar-brand", @style = "color:white" })
+                </div>
+                <div class="navbar-collapse collapse">
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        var rol = User.Identity.GetUserName().Split('-');
+                        if (rol[1].Equals("Administrador"))
+                        {
+                            <ul class="nav navbar-nav">
+                                <li>@Html.ActionLink("Usuarios", "Index", "Usuarios", null, new { @style = "color:white" })</li>
+                            </ul>
+                            <ul class="nav navbar-nav">
+                                <li>@Html.ActionLink("Productos", "Index", "Productos", null, new { @style = "color:white" })</li>
+                            </ul>
+                            <ul class="nav navbar-nav">
+                                <li>@Html.ActionLink("Pedidos", "listaPedidos", "Pedidos", null, new { @style = "color:white" })</li>
+                            </ul>
+                            <ul class="nav navbar-nav">
+                                <li>@Html.ActionLink("Reportes", "ProductoVendido", "Reportes",null ,new { @style = "color:white" })</li>
+                            </ul>
+                        }
+                        else
+                        {
+                            <ul class="nav navbar-nav">
+                                <li>@Html.ActionLink("Pedidos", "listaPedidos", "Pedidos", null, new { @style = "color:white" })</li>
+                            </ul>
+                        }
+
+                    }
+                    else
+                    {
+                        <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("Quienes Somos", "QuienesSomos", "Home", null, new { @style = "color:white" })</li>
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("Mision y Vision", "Mision", "Home", null, new { @style = "color:white" })</li>
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("Contacto", "Contacto", "Home", null, new { @style = "color:white" })</li>
+                        </ul>
+
+                    }
+                    @Html.Partial("_LoginParcial")
+                </div>
+            </div>
+        </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Proyecto_Integrador</p>
+            </footer>
+        </div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Proyecto_Integrador.Models.Productos>
+
+@{
+    ViewBag.Title = "Prodcutos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+</head>
+
+<h2>Inicio</h2>
+
+<a class="btn btn-default" href="@Url.Action("Crear","Productos")">
+    <i class="fas fa-plus-square"></i>
+    Crear
+</a>
+
+<table class="table table-striped">
+    <tr style="background-color:  #262626; color:grey">
+        <th>
+            @Html.DisplayNameFor(model => model.Figura)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Precio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Figura)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantidad)
+            </td>
+            <td>
+                <a class="btn btn-default" href="@Url.Action("Edit","Productos",new { id = item.Id })">
+                    <i class="fas fa-pencil-alt"></i>
+                    Editar
+                </a>
+                <a class="btn btn-default" href="@Url.Action("Details","Productos",new { id = item.Id })">
+                    <i class="fas fa-info"></i>
+                    Detalles
+                </a>
+                <a class="btn btn-default" href="@Url.Action("Delete","Productos",new { id = item.Id })">
+                    <i class="fas fa-trash-alt"></i>
+                    Eliminar
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>
+

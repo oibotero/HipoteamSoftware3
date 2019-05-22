@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "ProductoVendido";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+
+window.onload = function () {
+    var Productos = new CanvasJS.Chart("Productos", {
+            animationEnabled: true,
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            title:{
+	            text: "Top Productos Vendidos"
+            },
+            axisY: {
+	            title: "Cantidad"
+            },
+            data: [{
+	            type: "column",
+	            showInLegend: true,
+	            legendMarkerColor: "grey",
+                legendText: "Productos",
+                exportEnabled: true,
+                dataPoints: @Html.Raw(ViewBag.DataPoints)
+            }]
+    });
+    Productos.render();
+    var Clientes = new CanvasJS.Chart("Clientes", {
+            animationEnabled: true,
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            title:{
+	            text: "Top Productos Vendidos"
+            },
+            axisY: {
+	            title: "Cantidad"
+            },
+            data: [{
+	            type: "column",
+	            showInLegend: true,
+	            legendMarkerColor: "grey",
+                legendText: "Productos",
+                exportEnabled: true,
+                dataPoints: @Html.Raw(ViewBag.DataPoints)
+            }]
+    });
+    Clientes.render();
+    var Disponibilidad = new CanvasJS.Chart("Disponibilidad", {
+            animationEnabled: true,
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            title:{
+	            text: "Disponibilidad de productos"
+            },
+            axisY: {
+	            title: "Cantidad"
+            },
+            data: [{
+	            type: "column",
+	            showInLegend: true,
+	            legendMarkerColor: "grey",
+                legendText: "Productos",
+                exportEnabled: true,
+                dataPoints: @Html.Raw(ViewBag.Disponibilidad)
+            }]
+    });
+    Disponibilidad.render();
+
+}
+</script>
+<br />
+<ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" href="#pro" role="tab" data-toggle="tab">Productos</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#client" role="tab" data-toggle="tab">Clientes</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#dis" role="tab" data-toggle="tab">Disponibilidad</a>
+    </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane fade in active" id="pro">
+        <br />
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div id="Productos" style="height: 400px; width: auto;"></div>
+            </div>
+        </div>
+        
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="client">
+        <br />
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div id="Clientes" style="height: 400px; width: auto;"></div>
+            </div>
+        </div>
+        
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="dis">
+        <br />
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div id="Disponibilidad" style="height: 400px; width: auto;"></div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
